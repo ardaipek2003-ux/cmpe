@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+.git
+.gitignore
+server/album.db
+server/album.db-wal
+server/album.db-shm
