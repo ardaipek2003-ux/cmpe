@@ -8,7 +8,7 @@ RUN apk add --no-cache python3 make g++ sqlite
 WORKDIR /app
 
 # Install build dependencies for better-sqlite3
-RUN apk add --no-cache python3 make g++
+RUN apk add --no-cache python3 make g++ py3-setuptools
 
 # Copy package.json and install dependencies
 COPY package*.json ./
