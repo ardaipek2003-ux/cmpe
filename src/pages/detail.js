@@ -11,7 +11,7 @@ export async function renderDetail(container, params) {
         <button class="btn btn-secondary" id="back-btn" style="margin-bottom:40px;border:none;padding:0;text-transform:uppercase;font-family:var(--font-display);font-weight:700">← Back</button>
         <div class="detail-grid">
           <div class="detail-img-container">
-            <img class="detail-img" src="http://localhost:3001${item.ThumbnailURL}" alt="${item.Title}" onerror="this.style.background='#dcd8ce';" />
+            <img class="detail-img" src="${item.ThumbnailURL}" alt="${item.Title}" onerror="this.style.background='#dcd8ce';" />
           </div>
           <div class="detail-info">
             <div style="margin-bottom:16px"><span class="media-badge ${item.MediaType}" style="font-size:0.85rem">${item.MediaType}</span></div>

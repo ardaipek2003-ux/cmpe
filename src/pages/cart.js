@@ -32,7 +32,7 @@ export function renderCart(container) {
             <div class="cart-list" id="cart-list">
               ${cart.map(item => `
                 <div class="cart-item" data-id="${item.photoId}">
-                  <img class="cart-item-img" src="http://localhost:3001${item.thumbnail}" alt="${item.title}" onerror="this.style.background='#dcd8ce'" />
+                  <img class="cart-item-img" src="${item.thumbnail}" alt="${item.title}" onerror="this.style.background='#dcd8ce'" />
                   <div class="cart-item-info">
                     <h4>${item.title}</h4>
                     <p><span class="media-badge ${item.mediaType}">${item.mediaType}</span></p>

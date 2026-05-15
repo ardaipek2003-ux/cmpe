@@ -84,7 +84,7 @@ export async function renderBrowse(container) {
         grid.innerHTML = data.items.map(item => `
           <div class="media-card fade-in" data-id="${item.PhotoID}">
             <div class="media-card-img-wrapper">
-              <img class="media-card-img" src="http://localhost:3001${item.ThumbnailURL}" alt="${item.Title}" loading="lazy" onerror="this.style.background='#dcd8ce';this.alt=''" />
+              <img class="media-card-img" src="${item.ThumbnailURL}" alt="${item.Title}" loading="lazy" onerror="this.style.background='#dcd8ce';this.alt=''" />
             </div>
             <div class="media-card-body">
               <div class="media-card-title">${item.Title}</div>

@@ -19,7 +19,7 @@ export async function renderCheckout(container, params) {
         <div class="cart-list" style="max-width:600px;margin:0 auto 40px;border-top:2px solid var(--text-primary)">
           ${order.items.map(item => `
             <div class="cart-item" style="grid-template-columns:80px 1fr auto;padding:24px 0">
-              <img class="cart-item-img" src="http://localhost:3001${item.ThumbnailURL}" alt="${item.Title}" style="width:80px;height:100px" onerror="this.style.background='#dcd8ce'" />
+              <img class="cart-item-img" src="${item.ThumbnailURL}" alt="${item.Title}" style="width:80px;height:100px" onerror="this.style.background='#dcd8ce'" />
               <div class="cart-item-info">
                 <h4 style="font-size:1.2rem">${item.Title}</h4>
                 <p><span class="media-badge ${item.MediaType}">${item.MediaType}</span></p>
@@ -76,7 +76,7 @@ export async function renderCheckout(container, params) {
               <span style="background:var(--text-primary);color:var(--bg-secondary);padding:6px 12px;font-size:0.75rem;text-transform:uppercase;font-weight:700">${order.Status}</span>
             </div>
             <div style="display:flex;gap:8px;margin-bottom:24px;overflow-x:auto;padding-bottom:8px">
-              ${order.items.map(item => `<img src="http://localhost:3001${item.ThumbnailURL}" alt="${item.Title}" style="width:60px;height:80px;object-fit:cover" onerror="this.style.background='#dcd8ce'" />`).join('')}
+              ${order.items.map(item => `<img src="${item.ThumbnailURL}" alt="${item.Title}" style="width:60px;height:80px;object-fit:cover" onerror="this.style.background='#dcd8ce'" />`).join('')}
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display)">
               <div style="color:var(--text-secondary);font-size:0.9rem">${serviceLabels[order.ServiceType]}</div>
