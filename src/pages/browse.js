@@ -4,7 +4,7 @@ export async function renderBrowse(container) {
   container.innerHTML = `
     <div class="page-header">
       <h1>Exhibition</h1>
-      <p>Curated photography, film, and soundscapes.</p>
+      <p style="max-width: 600px; margin-top: 16px;">Welcome to PhotoLab Gallery, your premier destination for museum-quality archival prints. Discover and acquire exclusive historical and contemporary masterpieces. Elevate your space with our curated collection of premium fine art, meticulously reproduced for collectors and enthusiasts.</p>
     </div>
     <div id="stats-bar" class="stats-bar"></div>
     <div class="search-panel" id="search-panel">
@@ -12,7 +12,7 @@ export async function renderBrowse(container) {
       <div class="search-grid">
         <div class="form-group" style="margin:0">
           <label class="form-label" for="search-name">Artist / Subject</label>
-          <input class="form-input" type="text" id="search-name" placeholder="e.g. Gurgen, Fikret" />
+          <input class="form-input" type="text" id="search-name" placeholder="Search by artist or subject..." />
         </div>
         <div class="form-group" style="margin:0">
           <label class="form-label" for="search-country">Region</label>
@@ -81,7 +81,12 @@ export async function renderBrowse(container) {
       if (data.items.length === 0) {
         grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><h3>No works found</h3><p>Try adjusting your search filters.</p></div>`;
       } else {
-        grid.innerHTML = data.items.map(item => `
+        grid.innerHTML = data.items.map(item => {
+          const artists = item.people && item.people.length > 0 
+            ? item.people.map(p => `${p.FirstName} ${p.LastName}`).join(', ') 
+            : 'Unknown Artist';
+          
+          return `
           <div class="media-card fade-in" data-id="${item.PhotoID}">
             <div class="media-card-img-wrapper">
               <img class="media-card-img" src="${item.ThumbnailURL}" alt="${item.Title}" loading="lazy" onerror="this.style.background='#dcd8ce';this.alt=''" />
@@ -93,9 +98,12 @@ export async function renderBrowse(container) {
                 <span>${item.Country}</span>
                 <span>${item.Year}</span>
               </div>
+              <div class="media-card-artist" style="margin-top: 12px; font-size: 0.95rem; color: var(--text-primary); font-weight: 600; font-family: var(--font-display); text-transform: uppercase;">
+                ${artists}
+              </div>
             </div>
           </div>
-        `).join('');
+        `}).join('');
 
         grid.querySelectorAll('.media-card').forEach(card => {
           card.onclick = () => navigate('detail', { id: card.dataset.id });
