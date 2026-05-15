@@ -145,8 +145,14 @@ input, select, textarea { font-family: var(--font-body); }
   padding: 40px; background: var(--bg-secondary);
 }
 .auth-card {
-  width: 100%; max-width: 440px;
+  width: 100%; max-width: 460px;
   animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 48px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
 }
 .auth-header { text-align: left; margin-bottom: 48px; }
 .auth-header .logo-icon { display: none; }
