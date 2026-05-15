@@ -27,7 +27,12 @@ export function renderLogin(container) {
       <p style="text-align:left;margin-top:32px;font-size:0.95rem;color:var(--text-secondary)">
         Don't have an account? <a href="#" id="goto-register" style="font-weight:700;color:var(--text-primary)">Create one</a>
       </p>
-      <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--border);font-size:0.85rem;color:var(--text-muted)">
+      <div style="margin-top:40px; padding-top:24px; border-top:1px solid var(--border); display:flex; gap:20px; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted)">
+        <span>● Museum Quality</span>
+        <span>● Global Shipping</span>
+        <span>● Secure Prints</span>
+      </div>
+      <div style="margin-top:24px; font-size:0.85rem; color:var(--text-muted)">
         Demo account: <strong style="color:var(--text-primary)">demo</strong> / <strong style="color:var(--text-primary)">demo123</strong>
       </div>
       </div>
