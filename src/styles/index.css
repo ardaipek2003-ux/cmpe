@@ -104,11 +104,11 @@ input, select, textarea { font-family: var(--font-body); }
 .user-menu:hover { transform: scale(1.05); }
 .dropdown { position: relative; }
 .dropdown-menu {
-  position: absolute; bottom: calc(100% + 16px); right: 0;
+  position: absolute; top: calc(100% + 16px); right: 0;
   background: var(--bg-secondary); border: 1px solid var(--border);
   border-radius: 16px; padding: 12px;
   min-width: 220px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-  display: none; z-index: 200; transform-origin: bottom right;
+  display: none; z-index: 200; transform-origin: top right;
 }
 .dropdown-menu.open { display: block; animation: fadeIn 0.2s ease forwards; }
 .dropdown-item {
