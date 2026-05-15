@@ -6,13 +6,19 @@ const path = require('path');
 const fs = require('fs');
 const { getDb } = require('./db.cjs');
 
+const SQLiteStore = require('connect-sqlite3')(session);
+
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(express.json());
 app.use(session({
+  store: new SQLiteStore({
+    dir: process.env.DB_DIR || __dirname,
+    db: 'sessions.db'
+  }),
   secret: 'photolab-album-secret-key-2024',
   resave: false,
   saveUninitialized: false,

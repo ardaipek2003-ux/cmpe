@@ -2,7 +2,7 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const bcryptjs = require('bcryptjs');
 
-const DB_PATH = path.join(__dirname, 'album.db');
+const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'album.db');
 
 let db;
 
@@ -177,14 +177,12 @@ function seedAdditionalMedia() {
   const r3 = insertPerson.run('Orson', 'Welles', 'American');
   const r4 = insertPerson.run('Axl', 'Rose', 'American');
   const r5 = insertPerson.run('Jimmy', 'Page', 'British');
-  const r6 = insertPerson.run('Herbert von', 'Karajan', 'Austrian');
 
   const p_lucas = r1.lastInsertRowid;
   const p_leone = r2.lastInsertRowid;
   const p_welles = r3.lastInsertRowid;
   const p_rose = r4.lastInsertRowid;
   const p_page = r5.lastInsertRowid;
-  const p_karajan = r6.lastInsertRowid;
 
   const insertPhoto = db.prepare('INSERT INTO Photo (Title, Description, MediaType, Country, Year, ThumbnailURL, FullURL) VALUES (?, ?, ?, ?, ?, ?, ?)');
   const insertAppearance = db.prepare('INSERT INTO Appearance (PhotoID, PersonID) VALUES (?, ?)');
@@ -199,8 +197,7 @@ function seedAdditionalMedia() {
     { Title: 'Once Upon a Time in America', Description: 'Classic gangster movie poster', MediaType: 'video', Country: 'Italian', Year: 1984, Thumbnail: '/media/once_upon.jpg', pid: p_leone },
     { Title: 'Citizen Kane', Description: 'Classic drama movie poster', MediaType: 'video', Country: 'American', Year: 1941, Thumbnail: '/media/citizen_kane.jpg', pid: p_welles },
     { Title: 'Appetite for Destruction', Description: 'Guns N Roses album cover', MediaType: 'audio', Country: 'American', Year: 1987, Thumbnail: '/media/gnr.jpg', pid: p_rose },
-    { Title: 'Led Zeppelin IV', Description: 'Classic rock album cover', MediaType: 'audio', Country: 'British', Year: 1971, Thumbnail: '/media/ledzep.jpg', pid: p_page },
-    { Title: 'Beethoven Symphonies', Description: 'Berlin Philharmonic album cover', MediaType: 'audio', Country: 'German', Year: 1963, Thumbnail: '/media/berlin.jpg', pid: p_karajan },
+    { Title: 'Led Zeppelin IV', Description: 'Classic rock album cover', MediaType: 'audio', Country: 'British', Year: 1971, Thumbnail: '/media/ledzep.jpg', pid: p_page }
   ];
 
   for (const m of newMedia) {

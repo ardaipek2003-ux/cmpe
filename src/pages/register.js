@@ -4,7 +4,9 @@ export function renderRegister(container) {
   const page = document.createElement('div');
   page.className = 'auth-page';
   page.innerHTML = `
-    <div class="auth-card fade-in" style="max-width:500px">
+    <div class="auth-hero" style="background-image: url('/media/citizen_kane.jpg')"></div>
+    <div class="auth-content">
+      <div class="auth-card fade-in" style="max-width:500px">
       <div class="auth-header">
         <div style="font-family:var(--font-display); font-size:1.5rem; font-weight:800; text-transform:uppercase; margin-bottom:16px; letter-spacing:-0.03em;">PhotoLab Gallery</div>
         <h1 style="font-family:var(--font-display)">Join the Exhibition.</h1>
@@ -45,6 +47,7 @@ export function renderRegister(container) {
       <p style="text-align:left;margin-top:32px;font-size:0.95rem;color:var(--text-secondary)">
         Already have an account? <a href="#" id="goto-login" style="font-weight:700;color:var(--text-primary)">Sign in</a>
       </p>
+      </div>
     </div>
   `;
   container.appendChild(page);

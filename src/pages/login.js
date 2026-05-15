@@ -4,7 +4,9 @@ export function renderLogin(container) {
   const page = document.createElement('div');
   page.className = 'auth-page';
   page.innerHTML = `
-    <div class="auth-card fade-in">
+    <div class="auth-hero" style="background-image: url('/media/tokyo_neon.jpg')"></div>
+    <div class="auth-content">
+      <div class="auth-card fade-in">
       <div class="auth-header">
         <div style="font-family:var(--font-display); font-size:1.5rem; font-weight:800; text-transform:uppercase; margin-bottom:16px; letter-spacing:-0.03em;">PhotoLab Gallery</div>
         <h1 style="font-family:var(--font-display)">Welcome Back.</h1>
@@ -27,6 +29,7 @@ export function renderLogin(container) {
       </p>
       <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--border);font-size:0.85rem;color:var(--text-muted)">
         Demo account: <strong style="color:var(--text-primary)">demo</strong> / <strong style="color:var(--text-primary)">demo123</strong>
+      </div>
       </div>
     </div>
   `;

@@ -123,11 +123,29 @@ input, select, textarea { font-family: var(--font-body); }
 
 /* ═══ Auth Pages ═══ */
 .auth-page {
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  min-height: 100vh; display: flex;
+  background: var(--bg-primary);
+}
+.auth-hero {
+  display: none;
+}
+@media (min-width: 900px) {
+  .auth-hero {
+    display: block; flex: 1.2;
+    position: relative;
+    background-size: cover; background-position: center;
+  }
+  .auth-hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+  }
+}
+.auth-content {
+  flex: 1; display: flex; align-items: center; justify-content: center;
   padding: 40px; background: var(--bg-secondary);
 }
 .auth-card {
-  width: 100%; max-width: 480px;
+  width: 100%; max-width: 440px;
   animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .auth-header { text-align: left; margin-bottom: 48px; }
