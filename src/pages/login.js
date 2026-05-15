@@ -6,8 +6,9 @@ export function renderLogin(container) {
   page.innerHTML = `
     <div class="auth-card fade-in">
       <div class="auth-header">
+        <div style="font-family:var(--font-display); font-size:1.5rem; font-weight:800; text-transform:uppercase; margin-bottom:16px; letter-spacing:-0.03em;">PhotoLab Gallery</div>
         <h1 style="font-family:var(--font-display)">Welcome Back.</h1>
-        <p style="color:var(--text-secondary)">Sign in to access your collection.</p>
+        <p style="color:var(--text-secondary)">Sign in to access your curated collection of premium archival prints.</p>
       </div>
       <form id="login-form">
         <div class="form-group">

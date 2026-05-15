@@ -6,8 +6,9 @@ export function renderRegister(container) {
   page.innerHTML = `
     <div class="auth-card fade-in" style="max-width:500px">
       <div class="auth-header">
-        <h1 style="font-family:var(--font-display)">Join Us.</h1>
-        <p style="color:var(--text-secondary)">Register to start collecting prints.</p>
+        <div style="font-family:var(--font-display); font-size:1.5rem; font-weight:800; text-transform:uppercase; margin-bottom:16px; letter-spacing:-0.03em;">PhotoLab Gallery</div>
+        <h1 style="font-family:var(--font-display)">Join the Exhibition.</h1>
+        <p style="color:var(--text-secondary)">Create an account to start collecting exclusive, museum-quality prints from world-renowned artists.</p>
       </div>
       <form id="register-form">
         <div class="form-row">
