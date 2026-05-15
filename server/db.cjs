@@ -172,26 +172,35 @@ function seedData() {
 
 function seedAdditionalMedia() {
   const insertPerson = db.prepare('INSERT INTO Person (FirstName, LastName, Country) VALUES (?, ?, ?)');
-  const r1 = insertPerson.run('Carlos', 'Santana', 'Spanish');
-  const r2 = insertPerson.run('Kenji', 'Miyazaki', 'Japanese');
-  const r3 = insertPerson.run('Ahmet', 'Yilmaz', 'Turkish');
-  const r4 = insertPerson.run('Diego', 'Luna', 'Mexican');
+  const r1 = insertPerson.run('George', 'Lucas', 'American');
+  const r2 = insertPerson.run('Sergio', 'Leone', 'Italian');
+  const r3 = insertPerson.run('Orson', 'Welles', 'American');
+  const r4 = insertPerson.run('Axl', 'Rose', 'American');
+  const r5 = insertPerson.run('Jimmy', 'Page', 'British');
+  const r6 = insertPerson.run('Herbert von', 'Karajan', 'Austrian');
 
-  const p_carlos = r1.lastInsertRowid;
-  const p_kenji = r2.lastInsertRowid;
-  const p_ahmet = r3.lastInsertRowid;
-  const p_diego = r4.lastInsertRowid;
+  const p_lucas = r1.lastInsertRowid;
+  const p_leone = r2.lastInsertRowid;
+  const p_welles = r3.lastInsertRowid;
+  const p_rose = r4.lastInsertRowid;
+  const p_page = r5.lastInsertRowid;
+  const p_karajan = r6.lastInsertRowid;
 
   const insertPhoto = db.prepare('INSERT INTO Photo (Title, Description, MediaType, Country, Year, ThumbnailURL, FullURL) VALUES (?, ?, ?, ?, ?, ?, ?)');
   const insertAppearance = db.prepare('INSERT INTO Appearance (PhotoID, PersonID) VALUES (?, ?)');
 
+  // Remove old audio/video items (the 'garbage' ones)
+  db.prepare("DELETE FROM Appearance WHERE PhotoID IN (SELECT PhotoID FROM Photo WHERE MediaType IN ('audio', 'video'))").run();
+  db.prepare("DELETE FROM Photo WHERE MediaType IN ('audio', 'video')").run();
+
   const newMedia = [
-    { Title: 'Tokyo Neon Nights', Description: 'Cinematic 4K urban footage', MediaType: 'video', Country: 'Japanese', Year: 2023, Thumbnail: '/media/tokyo_neon.jpg', pid: p_kenji },
-    { Title: 'Grand Bazaar Walkthrough', Description: 'Immersive cultural footage', MediaType: 'video', Country: 'Turkish', Year: 2022, Thumbnail: '/media/grand_bazaar.jpg', pid: p_ahmet },
-    { Title: 'Mexico Festival Colors', Description: 'Vibrant cultural documentary', MediaType: 'video', Country: 'Mexican', Year: 2023, Thumbnail: '/media/mexico_festival.jpg', pid: p_diego },
-    { Title: 'Spanish Guitar Session', Description: 'Acoustic soundscape', MediaType: 'audio', Country: 'Spanish', Year: 2023, Thumbnail: '/media/spanish_guitar.svg', pid: p_carlos },
-    { Title: 'Guzheng Melodies', Description: 'Traditional soundscape', MediaType: 'audio', Country: 'Chinese', Year: 2022, Thumbnail: '/media/guzheng.svg', pid: p_kenji },
-    { Title: 'Street Music Beats', Description: 'Urban soundscape', MediaType: 'audio', Country: 'American', Year: 2023, Thumbnail: '/media/street_music.svg', pid: p_carlos },
+    { Title: 'Star Wars: A New Hope', Description: 'Classic sci-fi movie poster', MediaType: 'video', Country: 'American', Year: 1977, Thumbnail: '/media/starwars.jpg', pid: p_lucas },
+    { Title: 'The Empire Strikes Back', Description: 'Classic sci-fi movie poster', MediaType: 'video', Country: 'American', Year: 1980, Thumbnail: '/media/empire.jpg', pid: p_lucas },
+    { Title: 'Once Upon a Time in America', Description: 'Classic gangster movie poster', MediaType: 'video', Country: 'Italian', Year: 1984, Thumbnail: '/media/once_upon.jpg', pid: p_leone },
+    { Title: 'Citizen Kane', Description: 'Classic drama movie poster', MediaType: 'video', Country: 'American', Year: 1941, Thumbnail: '/media/citizen_kane.jpg', pid: p_welles },
+    { Title: 'Appetite for Destruction', Description: 'Guns N Roses album cover', MediaType: 'audio', Country: 'American', Year: 1987, Thumbnail: '/media/gnr.jpg', pid: p_rose },
+    { Title: 'Led Zeppelin IV', Description: 'Classic rock album cover', MediaType: 'audio', Country: 'British', Year: 1971, Thumbnail: '/media/ledzep.jpg', pid: p_page },
+    { Title: 'Beethoven Symphonies', Description: 'Berlin Philharmonic album cover', MediaType: 'audio', Country: 'German', Year: 1963, Thumbnail: '/media/berlin.jpg', pid: p_karajan },
   ];
 
   for (const m of newMedia) {
