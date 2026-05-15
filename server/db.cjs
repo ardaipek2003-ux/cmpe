@@ -80,11 +80,19 @@ function initializeDatabase() {
 
   // Check if data already seeded
   const count = db.prepare('SELECT COUNT(*) as c FROM Photo').get();
-  if (count.c > 0) return;
-
-  console.log('Seeding database...');
-  seedData();
-  console.log('Database seeded successfully.');
+  if (count.c === 0) {
+    console.log('Seeding database...');
+    seedData();
+    console.log('Database seeded successfully.');
+  } else {
+    // Migration: check if audio/video exist
+    const mediaCount = db.prepare("SELECT COUNT(*) as c FROM Photo WHERE MediaType IN ('audio', 'video')").get();
+    if (mediaCount.c === 0) {
+      console.log('Running migration: adding audio and video items...');
+      seedAdditionalMedia();
+      console.log('Migration complete.');
+    }
+  }
 }
 
 function seedData() {
@@ -158,6 +166,38 @@ function seedData() {
   db.prepare(
     'INSERT INTO User (Username, Password, FirstName, LastName, Email, MailingAddress) VALUES (?, ?, ?, ?, ?, ?)'
   ).run('demo', hash, 'Demo', 'User', 'demo@photolab.com', '123 Main St, Istanbul, Turkey');
+
+  seedAdditionalMedia();
+}
+
+function seedAdditionalMedia() {
+  const insertPerson = db.prepare('INSERT INTO Person (FirstName, LastName, Country) VALUES (?, ?, ?)');
+  const r1 = insertPerson.run('Carlos', 'Santana', 'Spanish');
+  const r2 = insertPerson.run('Kenji', 'Miyazaki', 'Japanese');
+  const r3 = insertPerson.run('Ahmet', 'Yilmaz', 'Turkish');
+  const r4 = insertPerson.run('Diego', 'Luna', 'Mexican');
+
+  const p_carlos = r1.lastInsertRowid;
+  const p_kenji = r2.lastInsertRowid;
+  const p_ahmet = r3.lastInsertRowid;
+  const p_diego = r4.lastInsertRowid;
+
+  const insertPhoto = db.prepare('INSERT INTO Photo (Title, Description, MediaType, Country, Year, ThumbnailURL, FullURL) VALUES (?, ?, ?, ?, ?, ?, ?)');
+  const insertAppearance = db.prepare('INSERT INTO Appearance (PhotoID, PersonID) VALUES (?, ?)');
+
+  const newMedia = [
+    { Title: 'Tokyo Neon Nights', Description: 'Cinematic 4K urban footage', MediaType: 'video', Country: 'Japanese', Year: 2023, Thumbnail: '/media/tokyo_neon.jpg', pid: p_kenji },
+    { Title: 'Grand Bazaar Walkthrough', Description: 'Immersive cultural footage', MediaType: 'video', Country: 'Turkish', Year: 2022, Thumbnail: '/media/grand_bazaar.jpg', pid: p_ahmet },
+    { Title: 'Mexico Festival Colors', Description: 'Vibrant cultural documentary', MediaType: 'video', Country: 'Mexican', Year: 2023, Thumbnail: '/media/mexico_festival.jpg', pid: p_diego },
+    { Title: 'Spanish Guitar Session', Description: 'Acoustic soundscape', MediaType: 'audio', Country: 'Spanish', Year: 2023, Thumbnail: '/media/spanish_guitar.svg', pid: p_carlos },
+    { Title: 'Guzheng Melodies', Description: 'Traditional soundscape', MediaType: 'audio', Country: 'Chinese', Year: 2022, Thumbnail: '/media/guzheng.svg', pid: p_kenji },
+    { Title: 'Street Music Beats', Description: 'Urban soundscape', MediaType: 'audio', Country: 'American', Year: 2023, Thumbnail: '/media/street_music.svg', pid: p_carlos },
+  ];
+
+  for (const m of newMedia) {
+    const res = insertPhoto.run(m.Title, m.Description, m.MediaType, m.Country, m.Year, m.Thumbnail, m.Thumbnail);
+    insertAppearance.run(res.lastInsertRowid, m.pid);
+  }
 }
 
 module.exports = { getDb };
