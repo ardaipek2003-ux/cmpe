@@ -4,7 +4,7 @@ export function renderLogin(container) {
   const page = document.createElement('div');
   page.className = 'auth-page';
   page.innerHTML = `
-    <div class="auth-hero" style="background-image: url('/media/tokyo_neon.jpg')"></div>
+    <div class="auth-hero" style="background-image: url('/media/starwars.jpg')"></div>
     <div class="auth-content">
       <div class="auth-card fade-in">
       <div class="auth-header">

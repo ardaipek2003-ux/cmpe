@@ -4,7 +4,7 @@ export function renderRegister(container) {
   const page = document.createElement('div');
   page.className = 'auth-page';
   page.innerHTML = `
-    <div class="auth-hero" style="background-image: url('/media/citizen_kane.jpg')"></div>
+    <div class="auth-hero" style="background-image: url('/media/ledzep.jpg')"></div>
     <div class="auth-content">
       <div class="auth-card fade-in" style="max-width:500px">
       <div class="auth-header">
